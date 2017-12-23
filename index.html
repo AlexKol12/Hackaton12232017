@@ -18,22 +18,22 @@
     <script>
     
         var taskId = 1;
-        $.ajax({
-                url: "http://kodaday.intita.com/api/task/" + taskId,
-                method: "GET",
-              datatype: "JSON",
-              headers: {"X-API-KEY" : "FXQdSwvi" },
-                success: function(Body) {
-                  console.log(Body);
-                },
-              error: function(e) {
-                console.log(e);
-                    }
-                });
+        // $.ajax({
+        //         url: "http://kodaday.intita.com/api/task/" + taskId,
+        //         method: "GET",
+        //       datatype: "JSON",
+        //       headers: {"X-API-KEY" : "FXQdSwvi" },
+        //         success: function(Body) {
+        //           console.log(Body);
+        //         },
+        //       error: function(e) {
+        //         console.log(e);
+        //             }
+        //         });
 
         $(document).ready(function(){
 
-            var data = '{"processors": [1,2,0,2,0,0], "tasks": [1,23,17,65]}';
+            var data = '{"processors": [1,2,2,0,0], "tasks": [1,23,17,45,43,56,56,56,65]}';
             function DBprocessors(data)
             {
                 function parseData(data) {
@@ -46,14 +46,41 @@
             }
 
             var db = new DBprocessors(data);
-            function compositeArray()
+
+            function compositeArrayTest()
             {
               a = [];
               for(var i = 0; i < db.tasks.length - 1; i++)
                 a[i] = db.processors[Math.floor(Math.random()*(db.processors.length-1))];
               return a;
             }
-            // contain is a random answer
+
+            function compositeArray(){
+                var res = [];
+                for(var i = 0; i < db.tasks.length; i++)
+                {
+                    var obj = [
+                        {cpu: 0, tact: 5},
+                        {cpu: 2, tact: 15},
+                        {cpu: 1, tact: 10}
+                    ];
+                   var index = false; 
+                   do{
+                        var best = obj.shift();
+                        if(!db.free.length)
+                        {
+                            db.free = db.processors.slice(0);
+                        }
+                        index = db.free.indexOf(best.cpu);
+                        console.log(index);
+                        if(index !== -1)
+                            break;
+                   }while(1);
+                    db.free.splice(index, 1);
+                    res[i] = best.cpu;
+                }
+                return res;
+            }
             var outcome = compositeArray();
             console.log(outcome);
         });
