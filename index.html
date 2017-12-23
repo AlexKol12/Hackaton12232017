@@ -31,7 +31,10 @@
             data = JSON.parse(data);
             this.processors = data['processors'];
             this.tasks      = data['tasks'];
-            this.free       = data['processors'].slice(0);
+            for(var i = 0; i < data['processors'].length; i++)
+            {
+                this.tacts[i] = 0;
+            }
         }
         function getObj(tact)
         {
@@ -62,7 +65,6 @@
                 if (a.tact > b.tact) return 1;
                 if (a.tact < b.tact) return -1;
              });
-            console.log(result[0], result[1], result[2]);
             return result;
         }
         function postTAsk (taskId, outcome) {
@@ -89,6 +91,9 @@
                     }
                 });
         }
+        function getTypeCpu(obj){
+            
+        }
         function processing(data){
             var db = new DBprocessors(data);
             function compositeArrayTest()
@@ -104,23 +109,12 @@
                 for(var i = 0; i < db.tasks.length; i++)
                 {
                     obj = getObj(db.tasks[i]);
-                   var index = false; 
-                   do{
-                        var best = obj.shift();
-                        if(!db.free.length)
-                        {
-                            db.free = db.processors.slice(0);
-                        }
-                        index = db.free.indexOf(best.cpu);
-                        if(index !== -1)
-                            break;
-                    }while(1);
-                    db.free.splice(index, 1);
-                    res[i] = best.cpu;
+                    res[i] = getTypeCpu(obj);
                 }
                 return res;
             }
             var outcome = compositeArray();
+            console.log(outcome);
             return outcome;
         }
 
