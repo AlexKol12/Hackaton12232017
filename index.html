@@ -22,7 +22,10 @@
     <button type="button" value="6"></button>
 
     <script>
-    
+        $("button").on("click", function(){
+            var taskId = $(this).val();
+            getTask(taskId);
+        });
         function DBprocessors(data)
         {
             data = JSON.parse(data);
@@ -61,8 +64,6 @@
              });
             return result;
         }
-
-        var taskId = 1;
         function postTAsk (taskId, outcome) {
             $.ajax({
                 url: "http://kodaday.intita.com/api/task/" + taskId,
