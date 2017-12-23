@@ -53,17 +53,16 @@
             var result = [];
             for(var i = 0; i < 3; i++)
             {
-                var r = {
+                result[i] = {
                     cpu: i,
                     tact: res[i]
                 };
-                result[i] = r;
             }
              result.sort(function(a,b){
                 if (a.tact > b.tact) return 1;
                 if (a.tact < b.tact) return -1;
              });
-
+            console.log(result[0], result[1], result[2]);
             return result;
         }
         function postTAsk (taskId, outcome) {
@@ -125,7 +124,7 @@
             return outcome;
         }
 
-        // processing('{"processors":[1,2,1,0,2,1,2],"tasks":[44,87,22,90,95,89,40,40,99,112,29,4,108,20,87,46,49,112,90,78,62,60,75,2,65,87,92,110,82,51,9,88,66,94,104,27]}');
+        processing('{"processors":[1,2,1,0,2,1,2],"tasks":[44,87,22,90,95,89,40,40,99,112,29,4,108,20,87,46,49,112,90,78,62,60,75,2,65,87,92,110,82,51,9,88,66,94,104,27]}');
     </script>
 </body>
 </html>
