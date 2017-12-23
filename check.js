@@ -1,6 +1,6 @@
 var x;
 
-function check(get x)
+function check( x)
 {
 	switch(x){
 		case '0':
