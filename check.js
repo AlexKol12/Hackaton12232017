@@ -1,27 +1,17 @@
-var x;
-
-function check( x)
-{
-	switch(x){
-		case '0':
-		x = x;
-		
-		case '1':
-		if(x%13){
-			x = 13*x;
-		}
-		else if(x%13 !=0){
-			x = 3*x+1;
-		}
-		
-		case '2':
-		if(x%2==0){
-			x=2*x;
-		}
-		else if(x%2==1){
-			x = 3*x+1;
-		}
-	}
-	
-	return new Array[x];
+function countTact(e) {
+    var res = [];
+    res[0] = e;
+    if(e%13 == 0)
+    {
+        res[1] = e/13;
+    } else {
+        res[1] = 3*e+1;
+    }
+    if(e%2 == 0)
+    {
+        res[2] = e/2;
+    } else {
+        res[2] = 3*e+1;
+    }
+    return res;
 }
