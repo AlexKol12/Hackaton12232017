@@ -14,5 +14,34 @@
 </head>
 <body>
 
+
+    <script>
+        $(document).ready(function(){
+
+            var data = '{"processors": [1,2,0,2,0,0], "tasks": [1,23,17,65]}';
+            function DBprocessors(data)
+            {
+                function parseData(data) {
+                  return JSON.parse(data);
+                }
+                data = parseData(data);
+                this.processors = data['processors'];
+                this.tasks      = data['tasks'];
+                this.free       = data['processors'].slice(0);
+            }
+
+            var db = new DBprocessors(data);
+            function compositeArray()
+            {
+              a = [];
+              for(var i = 0; i < db.tasks.length - 1; i++)
+                a[i] = db.processors[Math.floor(Math.random()*(db.processors.length-1))];
+              return a;
+            }
+            // contain is a random answer
+            var outcome = compositeArray();
+            console.log(outcome);
+        });
+    </script>
 </body>
 </html>
