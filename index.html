@@ -25,10 +25,7 @@
     
         function DBprocessors(data)
         {
-            function parseData(data) {
-              return JSON.parse(data);
-            }
-            data = parseData(data);
+            data = JSON.parse(data);
             this.processors = data['processors'];
             this.tasks      = data['tasks'];
             this.free       = data['processors'].slice(0);
@@ -49,7 +46,20 @@
             } else {
                 res[2] = 3*e+1;
             }
-            return res;
+            var i = 0;
+            var result = [];
+            for(i = 0; i < res.length; i++)
+            {
+                var r = {};
+                r.cpu = i;
+                r.tact = res[i];
+                result.push(r);
+            }
+             result.sort(function(a,b){
+                if (a.tact > b.tact) return 1;
+                if (a.tact < b.tact) return -1;
+             });
+            return result;
         }
 
         var taskId = 1;
