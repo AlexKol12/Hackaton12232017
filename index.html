@@ -16,6 +16,21 @@
 
 
     <script>
+    
+        var taskId = 1;
+        $.ajax({
+                url: "http://kodaday.intita.com/api/task/" + taskId,
+                method: "GET",
+              datatype: "JSON",
+              headers: {"X-API-KEY" : "FXQdSwvi" },
+                success: function(Body) {
+                  console.log(Body);
+                },
+              error: function(e) {
+                console.log(e);
+                    }
+                });
+
         $(document).ready(function(){
 
             var data = '{"processors": [1,2,0,2,0,0], "tasks": [1,23,17,65]}';
